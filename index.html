@@ -948,6 +948,14 @@ h1 {
   background: var(--white);
 }
 
+.requirement-guides {
+  margin: 28px 0 0;
+}
+
+.requirement-guides > div {
+  scroll-margin-top: 112px;
+}
+
 .definition-list p {
   margin: 0;
 }
@@ -1289,8 +1297,11 @@ function showToast(message) {
 function openHashTarget({ scroll = true } = {}) {
   if (!window.location.hash) return;
   const target = document.querySelector(window.location.hash);
-  if (!(target instanceof HTMLDetailsElement)) return;
-  target.open = true;
+  if (!target) return;
+  const article = target instanceof HTMLDetailsElement
+    ? target
+    : target.closest('.support-article');
+  if (article instanceof HTMLDetailsElement) article.open = true;
   if (scroll) {
     window.setTimeout(() => target.scrollIntoView({ block: 'start' }), 80);
   }
@@ -1544,6 +1555,32 @@ openHashTarget({ scroll: false });
                   <label><input type="checkbox" /> Espelho do IPTU</label>
                   <label><input type="checkbox" /> Autorização eletrônica</label>
                 </div>
+                <div class="definition-list requirement-guides">
+                  <div id="opcoes-nome-empresa">
+                    <strong>Opções de nome da empresa</strong>
+                    <p>Separe três alternativas em ordem de preferência. O envio registra as opções, mas a disponibilidade será conferida posteriormente.</p>
+                  </div>
+                  <div id="endereco-empresa">
+                    <strong>CEP e endereço da sede</strong>
+                    <p>Informe o CEP do local onde a empresa funcionará. O CEP pode ser enviado com ou sem hífen.</p>
+                  </div>
+                  <div id="estado-civil">
+                    <strong>Estado civil</strong>
+                    <p>Informe sua situação atual. Se houver união estável ou outra condição que precise de complemento, explique durante a conversa.</p>
+                  </div>
+                  <div id="rg-cnh">
+                    <strong>RG ou CNH</strong>
+                    <p>Envie uma foto legível ou PDF do documento completo. Inclua frente e verso quando houver informações nos dois lados.</p>
+                  </div>
+                  <div id="comprovante-endereco">
+                    <strong>Comprovante de endereço</strong>
+                    <p>Utilize um documento recente, com nome, endereço e data visíveis. Se estiver em nome de outra pessoa, avise o Abraão.</p>
+                  </div>
+                  <div id="espelho-iptu">
+                    <strong>Espelho ou documento do IPTU</strong>
+                    <p>Envie o documento do imóvel em que apareçam o endereço e a inscrição imobiliária. Não envie somente o comprovante de pagamento.</p>
+                  </div>
+                </div>
                 <div class="notice">
                   O recebimento registra o documento. A equipe responsável fará
                   a conferência antes de concluir o processo.
@@ -1579,6 +1616,16 @@ openHashTarget({ scroll: false });
                   <label><input type="checkbox" /> Último DAS pago</label>
                   <label><input type="checkbox" /> Certificado A1 e senha</label>
                   <label><input type="checkbox" /> Autorização eletrônica</label>
+                </div>
+                <div class="definition-list requirement-guides">
+                  <div id="cnpj-empresa">
+                    <strong>CNPJ da empresa</strong>
+                    <p>Consulte o cartão CNPJ ou o comprovante oficial da Receita Federal. Envie os 14 dígitos, com ou sem pontuação.</p>
+                  </div>
+                  <div id="credenciais-prefeitura">
+                    <strong>Acesso ao portal da Prefeitura</strong>
+                    <p>O usuário pode ser CPF, CNPJ, inscrição municipal ou outro identificador definido pelo município. O Abraão solicitará os dados necessários durante a coleta.</p>
+                  </div>
                 </div>
               </div>
             </details>
